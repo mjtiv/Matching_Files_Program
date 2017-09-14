@@ -16,13 +16,22 @@ verify two files are the same from a programs output. All user has to do is chan
 the "Matching_Files_Parameter_File.txt" to their files of interests and run the program locally
 or in an HPC environment. 
 
-# Program Files:
-matching_files.py (python script file)
+# Files Provided in Repository 
 
-Matching_Files_Paramter_File.txt (input paramter file to run program)
+Program Files:
 
+File 1. matching_files.py (python script file)
 
+File 2. Matching_Files_Paramter_File.txt  (paramter file that users change to change program inputs)
 
-# Output:Two files
-# File 1 (Report_File.txt) which contains a overview of the files and number of matching and mismatching lines of data
-# File 2 (Mis-match_Report.txt) contains all lines of the files that do not match
+Example Dataset to Run Program
+
+File 3. TEST_File_1.txt
+
+File 4. TEST_File_2.txt
+
+Example Output From Program
+
+File 5. Report_File.txt which contains a overview of the files and number of matching and mismatching lines of data
+
+File 6. Mis-match_Report.txt contains all lines of the files that do not match
