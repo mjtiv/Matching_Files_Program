@@ -1,0 +1,4 @@
+The following lines below do not match
+File_1	File_2
+SNP_2	AB	AA	AB	AA	AB
+	SNP_2	AA	AA	AB	AA	AB
