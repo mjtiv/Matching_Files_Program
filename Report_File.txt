@@ -1,5 +1,6 @@
+Summary Report of Analysis
 The number of lines of TEST_File_1.txt is: 6
 The number of lines of TEST_File_2.txt is: 6
+
 Line counts match---checking lines
 The number of matching lines is 5
-The number of lines NOT matching 1
