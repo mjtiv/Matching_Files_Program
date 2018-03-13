@@ -1,16 +1,19 @@
 #!/usr/bin/env python3.6
 
+# Version matching_files2.0.0.py
+
 # Note: Code was Developed in the Abasht Laboratory at the University of Delaware under
 # the supervision of Dr. Behnam Abasht
 # website: http://canr.udel.edu/faculty/behnam-abasht/
 
-#################################Comparing Files to See if they Match (Identical Matches)#######################
-#################################Code Written by M. Joseph Tomlinson IV#########################################
+#################################Matching Files Program####################################################
+#################################Code Written by M. Joseph Tomlinson IV####################################
 
-#Program compares two Files to see if they perfectly match. Compares the line
-#count first and if the two file match, continues with the more lengthy, line by
-#line matching. Overall goal is to verify files match exactly. Was developed to
-#verify two files are the same from a programs output
+# Program compares two Files to see if they perfectly match. Compares the line count first and if the two files line
+# counts match, continues with the more lengthy, line by line matching. Overall goal is to verify files match exactly.
+# Was developed to verify two files are the same from a programs output. All user has to do is
+# change the "Matching_Files_Parameter_File.txt" to their files of
+# interests and run the program locally or in an HPC environment.
 
 #Input:
 #Program accepts an input parameter file (Matching_Files_Parameter_File.txt) with the
@@ -20,7 +23,7 @@
 # File 1 (Report_File.txt) which contains a overview of the files and number of matching and mismatching lines of data
 # File 2 (Mis-match_Report.txt) contains all lines of the files that do not match
 
-####################################################Code to Parse the Parameter File################################################
+##############################Code to Parse the Parameter File###########################
 #Definition splits up a line based on tab
 #to return the input value from that line
 def split_variable (line):
@@ -58,7 +61,7 @@ def line_counter(file):
 def check_lines(file_one, file_two):
     mis_matching_Report=open("Mis-match_Report.txt","w")
     mis_matching_Report.write("The following lines below do not match"+"\n")
-    mis_matching_Report.write("File_1"+"\t"+"File_2"+"\n")
+    mis_matching_Report.write("File"+"\t"+"Line"+"\n")
 
     #Opening the files to read the data (again)
     file_one = open(file_one, 'r')
@@ -71,20 +74,36 @@ def check_lines(file_one, file_two):
     matching_line_count=0
     non_matching_line_count=0
 
-    #Begin examining lines of files for matches (found suggestion to use this style of zipping
-    #and overall style of code for file matching from  
-    #https://stackoverflow.com/questions/11253667/compare-files-line-by-line-to-see-if-they-are-the-same-if-so-output-them 
-    #extremely fast and efficienty way to parse through all the data in both files (VERY fast)
+    #Get the Mismatching Lines from Input File One
+    for line_file_one in file_one_content:
+        counter= 0
+        for line_file_two in file_two_content:
+           if line_file_one == line_file_two:
+               matching_line_count+=1
+               break
+           else:
+               counter+=1
+               if counter == len(file_two_content):
+                   mis_matching_Report.write("Input_File_One\t"+str(line_file_one))
+               else:
+                   pass
 
-    zipped_data=zip(file_one_content,file_two_content)
+    mis_matching_Report.write("\n")
 
-    for x, y in zipped_data:
-       if x == y:
-           matching_line_count+=1
-       else:
-           mis_matching_Report.write(x+"\t"+y)
-           non_matching_line_count+=1
-    return {'matching_count':matching_line_count, 'non_matching_count':non_matching_line_count}
+    #Get the Mismatching Lines from Input File Two
+    for line_file_two in file_two_content:
+        counter= 0
+        for line_file_one in file_one_content:
+           if line_file_one == line_file_two:
+               break
+           else:
+               counter+=1
+               if counter == len(file_one_content):
+                   mis_matching_Report.write("Input_File_Two\t"+str(line_file_two))
+               else:
+                   pass
+    
+    return {'matching_line_count':matching_line_count}
 
 
 def main():
@@ -105,33 +124,16 @@ def main():
 
     #Create report files for if the data matches or not
     report_file=open("Report_File.txt","w")
+    report_file.write("Summary Report of Analysis")
+    report_file.write("\n")
     report_file.write("The number of lines of "+input_file_one+" is: "+str(file_one_count)+"\n")
     report_file.write("The number of lines of "+input_file_two+" is: "+str(file_two_count)+"\n")
+    report_file.write("\n")
+    report_file.write("Line counts match---checking lines"+"\n")
 
-    #Actual  running of the program to compare lines of the file
-    #if the line counts match, will continue to run the program
-    if file_one_count==file_two_count:
-        report_file.write("Line counts match---checking lines"+"\n")
-        line_counts=check_lines(input_file_one, input_file_two)
+    line_counts=check_lines(input_file_one, input_file_two)
+    matching_lines=line_counts['matching_line_count']
+    report_file.write("The number of matching lines is "+str(matching_lines)+"\n")
 
-        matching_lines=line_counts['matching_count']
-        non_matching_lines=line_counts['non_matching_count']
-
-        report_file.write("The number of matching lines is "+str(matching_lines)+"\n")
-        report_file.write("The number of lines NOT matching "+str(non_matching_lines))
-
-    #If line count is not the same program ends  
-    else:
-        report_file.write("Line counts DO NOT match---killing program")
     
 main()
-
-
-
-
-
-
-
-
-
-
