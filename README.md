@@ -9,11 +9,8 @@ the supervision of Dr. Behnam Abasht
 website: http://canr.udel.edu/faculty/behnam-abasht/
 
 # Program Overview
-Program compares two Files to see if they perfectly match. Compares the line
-count first and if the two files line counts match, continues with the more lengthy, line by
-line matching. Overall goal is to verify files match exactly. Was developed to
-verify two files are the same from a programs output. All user has to do is change 
-the "Matching_Files_Parameter_File.txt" to their files of interests and run the program locally
+Program compares two Files to see if they match. Compares the files line
+by line to see which lines match. The order of the lines does not quite matter because the program cycles through everything. Lines that are different in either file are reported back in the mis-match report file. All user has to do is change the "Matching_Files_Parameter_File.txt" to their files of interests and run the program locally
 or in an HPC environment. 
 
 # Files Provided in Repository 
